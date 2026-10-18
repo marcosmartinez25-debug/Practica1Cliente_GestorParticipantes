@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestor de participantes del evento</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/logica.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+
+<body data-tema="claro" data-tamano="normal">
+
+  <header class="cabecera">
+    <h1>Gestor de participantes del evento</h1>
+    <p class="subtitulo">Desarrollo Web en Entorno Cliente &middot; Unidad didáctica 1</p>
+    <p id="mensajeGlobal" class="mensaje" role="status" aria-live="polite"></p>
+  </header>
+
+  <main class="contenido">
+
+    <section class="bloque" aria-labelledby="tituloAlta">
+      <h2 id="tituloAlta">Alta de participantes</h2>
+
+      <form id="formularioAlta" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="off">
+          <p class="error" id="errorNombre" data-error-de="nombre"></p>
+        </div>
+
+        <div class="campo">
+          <label for="edad">Edad (0 a 120)</label>
+          <input type="text" id="edad" name="edad" inputmode="numeric" autocomplete="off">
+          <p class="error" id="errorEdad" data-error-de="edad"></p>
+        </div>
+
+        <div class="campo">
+          <label for="tipo">Tipo</label>
+          <select id="tipo" name="tipo">
+            <option value="">Elige una opción</option>
+            <option value="estudiante">Estudiante</option>
+            <option value="profesional">Profesional</option>
+            <option value="invitado">Invitado</option>
+          </select>
+          <p class="error" id="errorTipo" data-error-de="tipo"></p>
+        </div>
+
+        <fieldset class="campo">
+          <legend>Modalidad</legend>
+          <label class="opcion">
+            <input type="radio" name="modalidad" value="presencial"> Presencial
+          </label>
+          <label class="opcion">
+            <input type="radio" name="modalidad" value="online"> Online
+          </label>
+          <p class="error" id="errorModalidad" data-error-de="modalidad"></p>
+        </fieldset>
+
+        <div class="campo">
+          <label for="experiencia">Experiencia (0 a 10, admite decimales)</label>
+          <input type="text" id="experiencia" name="experiencia" inputmode="decimal" autocomplete="off">
+          <p class="error" id="errorExperiencia" data-error-de="experiencia"></p>
+        </div>
+
+        <div class="acciones">
+          <button type="submit" id="botonAlta">Dar de alta</button>
+          <button type="button" id="botonLimpiar">Limpiar formulario</button>
+        </div>
+      </form>
+
+      <div id="resumenErrores" class="resumen-errores" role="alert" hidden>
+        <h3>Revisa estos errores</h3>
+        <ul id="listaErrores"></ul>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="tituloListado">
+      <h2 id="tituloListado">Participantes inscritos</h2>
+
+      <div class="filtros">
+        <div class="campo">
+          <label for="busqueda">Buscar por nombre</label>
+          <input type="search" id="busqueda" autocomplete="off" placeholder="Parte del nombre">
+        </div>
+        <div class="campo">
+          <label for="filtroModalidad">Filtrar por modalidad</label>
+          <select id="filtroModalidad">
+            <option value="todas">Todas</option>
+            <option value="presencial">Presencial</option>
+            <option value="online">Online</option>
+          </select>
+        </div>
+        <button type="button" id="botonReiniciarFiltros">Quitar filtros</button>
+      </div>
+
+      <p id="mensajeListado" class="mensaje-listado" role="status"></p>
+      <div id="listaParticipantes" class="lista-participantes"></div>
+    </section>
+
+    <section class="bloque" aria-labelledby="tituloEstadisticas">
+      <h2 id="tituloEstadisticas">Estadísticas</h2>
+      <p class="nota">Se calculan siempre sobre la colección completa, aunque el listado esté filtrado.</p>
+
+      <dl class="estadisticas">
+        <div><dt>Total de participantes</dt><dd id="estTotal">0</dd></div>
+        <div><dt>Menores de edad</dt><dd id="estMenores">0</dd></div>
+        <div><dt>Mayores de edad</dt><dd id="estMayores">0</dd></div>
+        <div><dt>Edad media</dt><dd id="estEdadMedia">Sin datos</dd></div>
+        <div><dt>Edad mínima</dt><dd id="estEdadMinima">Sin datos</dd></div>
+        <div><dt>Edad máxima</dt><dd id="estEdadMaxima">Sin datos</dd></div>
+        <div><dt>Presenciales</dt><dd id="estPresencial">0</dd></div>
+        <div><dt>Online</dt><dd id="estOnline">0</dd></div>
+        <div><dt>Estudiantes</dt><dd id="estEstudiantes">0</dd></div>
+        <div><dt>Profesionales</dt><dd id="estProfesionales">0</dd></div>
+        <div><dt>Invitados</dt><dd id="estInvitados">0</dd></div>
+        <div><dt>Experiencia media (presenciales)</dt><dd id="estExperienciaPresencial">Sin datos</dd></div>
+        <div><dt>Primer menor de edad</dt><dd id="estPrimerMenor">No hay menores de edad</dd></div>
+      </dl>
+    </section>
+
+    <section class="bloque" aria-labelledby="tituloJson">
+      <h2 id="tituloJson">Intercambio de datos en JSON</h2>
+
+      <div class="campo">
+        <label for="areaJson">Colección en formato JSON</label>
+        <textarea id="areaJson" rows="12" spellcheck="false"></textarea>
+      </div>
+
+      <div class="acciones">
+        <button type="button" id="botonExportar">Exportar a JSON</button>
+        <button type="button" id="botonImportar">Importar desde JSON</button>
+      </div>
+
+      <div id="resumenJson" class="resumen-errores" role="alert" hidden>
+        <h3>Resultado de la importación</h3>
+        <ul id="listaErroresJson"></ul>
+      </div>
+    </section>
+
+    <section class="bloque" aria-labelledby="tituloPanel">
+      <h2 id="tituloPanel">Panel del evento</h2>
+      <p class="nota">
+        Página incrustada que recibe el resumen mediante postMessage. La página
+        principal no toca su contenido: el panel construye su propio DOM.
+      </p>
+      <iframe
+        id="panelEvento"
+        src="panel.html"
+        title="Panel resumen del evento con el total de inscritos, las cantidades por modalidad y la última inscripción"
+        class="panel-evento"></iframe>
+      <p id="estadoPanel" class="nota" role="status">Esperando a que el panel esté preparado…</p>
+    </section>
+
+    <section class="bloque" aria-labelledby="tituloPreferencias">
+      <h2 id="tituloPreferencias">Preferencias</h2>
+      <p class="nota">Se intentan conservar 30 días en dos cookies independientes.</p>
+
+      <div class="filtros">
+        <div class="campo">
+          <label for="selectorTema">Tema</label>
+          <select id="selectorTema">
+            <option value="claro">Claro</option>
+            <option value="oscuro">Oscuro</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="selectorTamano">Tamaño de letra</label>
+          <select id="selectorTamano">
+            <option value="normal">Normal</option>
+            <option value="grande">Grande</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="acciones">
+        <button type="button" id="botonGuardarPreferencias">Guardar preferencias</button>
+        <button type="button" id="botonRestablecerPreferencias">Restablecer</button>
+      </div>
+
+      <p id="estadoPreferencias" class="mensaje" role="status"></p>
+    </section>
+
+
+    <section class="bloque" aria-labelledby="tituloAyuda">
+      <h2 id="tituloAyuda">Ayuda</h2>
+      <div class="acciones">
+        <button type="button" id="botonAbrirAyuda">Abrir ayuda en otra ventana</button>
+        <button type="button" id="botonCerrarAyuda">Cerrar la ventana de ayuda</button>
+      </div>
+      <p id="estadoAyuda" class="mensaje" role="status"></p>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p>Práctica de la unidad didáctica 1 &middot; HTML, CSS y JavaScript de navegador, sin frameworks.</p>
+  </footer>
+
+</body>
+</html>

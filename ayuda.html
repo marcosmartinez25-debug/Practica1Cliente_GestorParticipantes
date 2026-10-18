@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda de Gestor de Participantes</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/ayuda.js" defer></script>
+</head>
+<body class="estilo-ayuda">
+    <h1>Ayuda</h1>
+
+    <section>
+        <h2>Cómo usar la aplicación</h2>
+        <ol>
+            <li>Rellena el formulario de alta y pulsa <em>Dar de alta</em>. Si algún dato no es válido, se mostrarán los errores y no se añadirá a nadie.</li>
+            <li>Cada participante aparecerá en una tarjeta con sus datos, clasificaciones y fecha de inscripción.</li>
+            <li>El botón <em>Dar de baja</em> pedirá confirmación antes de eliminar al participante.</li>
+            <li>La búsqueda por nombre y el filtro por modalidad se pueden combinar. Las estadísticas seguirán calculándose sobre la colección completa.</li>
+            <li>Con <em>Exportar a JSON</em>, obtendrás la colección en texto, y con <em>Importar desde JSON</em>, la sustituirás, siempre que todos los datos sean válidos.</li>
+            <li>En <em>Preferencias</em>, puedes elegir tema y tamaño de letra; se intentará conservar durante 30 días en cookies.</li>
+        </ol>
+    </section>
+    <section>
+        <h2>Datos del navegador</h2>
+        <p>Información descriptiva: no se utiliza para validar participantes ni para tomar decisiones de seguridad.</p>
+        <dl>
+            <div><dt>Idioma del navegador</dt><dd id="datoIdioma">Sin datos</dd></div>
+            <div><dt>Origen de la página</dt><dd id="datoOrigen">Sin datos</dd></div>
+            <div><dt>Resolución de pantalla</dt><dd id="datoPantalla">Sin datos</dd></div>
+        </dl>
+    </section>
+
+    <p><button type="button" id="botonCerrarVentana">Cerrar esta ventana</button></p>
+</body>
+</html>
