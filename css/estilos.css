@@ -1,0 +1,302 @@
+/* estilos.css — para index.html, panel.html y ayuda.html */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background: #f4f6fb;
+  color: #1d2433;
+}
+
+/* ----- Estructura ----- */
+
+.cabecera,
+.contenido,
+.pie {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.bloque {
+  background: #ffffff;
+  border: 1px solid #d6dced;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.bloque h2 {
+  margin-top: 0;
+}
+
+.subtitulo,
+.nota,
+.mensaje,
+.mensaje-listado,
+.pie,
+.tarjeta__id,
+.panel__etiqueta,
+.panel__vacio {
+  color: #5a6477;
+  font-size: 0.9em;
+}
+
+/* ----- Formularios ----- */
+
+.campo {
+  margin-bottom: 0.9rem;
+}
+
+.campo label,
+.campo legend {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.opcion {
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: normal;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font: inherit;
+  background: #f4f6fb;
+  color: #1d2433;
+  border: 1px solid #d6dced;
+  border-radius: 6px;
+}
+
+textarea {
+  font-family: monospace;
+  resize: vertical;
+}
+
+button {
+  width: auto;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  background: #2f5bd7;
+  color: #ffffff;
+  border: 1px solid #2f5bd7;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filtros .campo {
+  flex: 1 1 200px;
+}
+
+/* ----- Errores ----- */
+
+.error {
+  margin: 0.25rem 0 0;
+  color: #b32020;
+  font-size: 0.88em;
+}
+
+.resumen-errores {
+  margin-top: 1rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #b32020;
+  border-radius: 10px;
+}
+
+.resumen-errores h3 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1em;
+  color: #b32020;
+}
+
+/* ----- Tarjetas ----- */
+
+.lista-participantes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.9rem;
+}
+
+.tarjeta {
+  padding: 0.8rem;
+  background: #f4f6fb;
+  border: 1px solid #d6dced;
+  border-left: 5px solid #2f5bd7;
+  border-radius: 10px;
+}
+
+.tarjeta--online {
+  border-left-color: #5a6477;
+}
+
+.tarjeta__nombre {
+  margin: 0;
+}
+
+.tarjeta__id {
+  margin: 0.2rem 0 0.5rem;
+}
+
+.tarjeta__datos {
+  list-style: none;
+  margin: 0 0 0.6rem;
+  padding: 0;
+  font-size: 0.92em;
+}
+
+.tarjeta__etiquetas {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0 0 0.7rem;
+}
+
+.etiqueta {
+  padding: 0.15rem 0.5rem;
+  font-size: 0.78em;
+  background: #ffffff;
+  border: 1px solid #d6dced;
+  border-radius: 999px;
+}
+
+.boton-baja {
+  background: transparent;
+  color: #b32020;
+  border-color: #b32020;
+}
+
+/* ----- Estadísticas ----- */
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.estadisticas div {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #d6dced;
+  border-radius: 8px;
+}
+
+.estadisticas dt {
+  font-size: 0.82em;
+  color: #5a6477;
+}
+
+.estadisticas dd {
+  margin: 0.15rem 0 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/* ----- Panel y ayuda ----- */
+
+.panel-evento {
+  width: 100%;
+  height: 230px;
+  border: 1px solid #d6dced;
+  border-radius: 10px;
+}
+
+.panel__titulo {
+  margin: 0 0 0.6rem;
+  font-size: 1.05em;
+}
+
+.panel__linea {
+  margin: 0.2rem 0;
+}
+
+.panel__vacio {
+  font-style: italic;
+}
+
+.cuerpo-ayuda {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ----- Preferencias: tamaño de letra ----- */
+
+body[data-tamano="grande"] {
+  font-size: 19px;
+}
+
+/* ----- Preferencias: tema oscuro ----- */
+
+body[data-tema="oscuro"] {
+  background: #141821;
+  color: #e8ecf5;
+}
+
+body[data-tema="oscuro"] .bloque {
+  background: #1e2430;
+  border-color: #323a4a;
+}
+
+body[data-tema="oscuro"] input,
+body[data-tema="oscuro"] select,
+body[data-tema="oscuro"] textarea,
+body[data-tema="oscuro"] .tarjeta,
+body[data-tema="oscuro"] .estadisticas div,
+body[data-tema="oscuro"] .panel-evento {
+  background: #141821;
+  color: #e8ecf5;
+  border-color: #323a4a;
+}
+
+body[data-tema="oscuro"] .etiqueta {
+  background: #1e2430;
+  border-color: #323a4a;
+}
+
+body[data-tema="oscuro"] .subtitulo,
+body[data-tema="oscuro"] .nota,
+body[data-tema="oscuro"] .mensaje,
+body[data-tema="oscuro"] .mensaje-listado,
+body[data-tema="oscuro"] .pie,
+body[data-tema="oscuro"] .tarjeta__id,
+body[data-tema="oscuro"] .estadisticas dt,
+body[data-tema="oscuro"] .panel__etiqueta,
+body[data-tema="oscuro"] .panel__vacio {
+  color: #a7b0c2;
+}
+
+body[data-tema="oscuro"] button {
+  background: #6f9bff;
+  color: #10141c;
+  border-color: #6f9bff;
+}
+
+body[data-tema="oscuro"] .tarjeta {
+  border-left-color: #6f9bff;
+}
+
+body[data-tema="oscuro"] .boton-baja {
+  background: transparent;
+  color: #ff8a80;
+  border-color: #ff8a80;
+}
